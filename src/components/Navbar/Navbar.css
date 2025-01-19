@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(7px);
+    height: 6rem;
+}
+
+.logo {
+    transition: transform 0.1s ease-in;
+    cursor: pointer;
+    height: 100%;
+    margin-left: 1rem;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.about {
+    margin-right: 1.5rem;
+    transition: transform 0.1s ease-in;
+}
+
+.about:hover {
+    transform: scale(1.05);
+}
+
+.about a {
+    color: black;
+    text-decoration: none;
+    background-color: #e9f035;
+    padding: 10px;
+    border-radius: 5px;
+}

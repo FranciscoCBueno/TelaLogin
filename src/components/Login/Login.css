@@ -1,0 +1,142 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    background-image: url('../../assets/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    height: max-content;
+}
+
+.navbar{
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: rgba(60, 60, 60, 0.7);
+    backdrop-filter: blur(7px);
+    color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 25rem;
+    border-radius: 5px;
+}
+
+.input-container {
+    width: 100%;
+}
+
+.input-container input {
+    height: 40px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: solid #e9f035 3px;
+    background-color: #fff;
+    width: 100%;
+}
+
+.sign-in {
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.sign-in:hover {
+    text-decoration: underline;
+}
+
+.login-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.login-text h2{
+    font-size: 15px;
+}
+
+.login-btn {
+    width: 50%;
+    height: 40px;
+    background-color: #e9f035;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in;
+    margin-top: 0.5rem;
+    font-size: 15px;
+}
+
+.login-btn:hover {
+    transform: scale(1.05);
+}
+
+.options {
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px;
+}
+
+.forgot-password {
+    color: #e9f035;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.keep-conected {
+    display: flex;
+    align-items: center;
+}
+
+.keep-conected-text {
+    width: 100%;
+}
+
+.keep-conected input {
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+}
+
+.input-container .input-error {
+    border-color: red;
+    color: red;
+}
+
+.input-container .input-error::placeholder {
+    color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
