@@ -51,3 +51,21 @@
 .return-btn:hover {
     transform: scale(1.05);
 }
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+    .message-container {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .success-text {
+        font-size: 1.65rem;
+        text-align: center;
+    }
+
+    .return-btn {
+        width: 100%;
+    }
+}
