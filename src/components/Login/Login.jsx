@@ -1,20 +1,50 @@
 import './Login.css'
 import { Navbar } from '../Navbar/Navbar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export default function Login() {
 
+    //Definição dos states
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({ email: '', password: '' });
+    const [keepConnected, setKeepConnected] = useState(false);
+    //Hook de navegação
     const navigate = useNavigate();
 
+    //Ao montar o componente, verifica se há dados salvos no localStorage e preenche os campos
+    //Nota: o localStorage não é uma forma segura para armazenagem de dados, e está sendo utilizado
+    //apenas para fins de demonstração.
+    //A forma correta seria fazer a integração com um sistema back-end e utilizar cookies ou tokens JWT
+    //para manter o usuário conectado.
+    useEffect(() => {
+        const savedEmail = localStorage.getItem('email');
+        const savedPassword = localStorage.getItem('password');
+        if (savedEmail && savedPassword) {
+            setEmail(savedEmail);
+            setPassword(savedPassword);
+            setKeepConnected(true);
+        }
+    }, []);
+
+    //Muda o estado do checkbox de "Mantenha-me conectado"
+    //Remove os dados salvos no localStorage se o checkbox for desmarcado
+    const handleKeepConnected = (e) => {
+        setKeepConnected(e.target.checked);
+        if (!e.target.checked) {
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+        }
+    };
+
+    //Validação do email
     const validateEmail = (email) => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
+    //Validação da senha
     const validatePassword = (password) => {
         if (password.trim().length >= 6) {
             return true;
@@ -23,6 +53,8 @@ export default function Login() {
         }
     };
 
+    //Ao sair do campo do email, verifica se o campo está preenchido e se o email é válido
+    //Caso contrário, salva uma mensagem de erro no state errors
     const handleEmailBlur = () => {
         if (!email) {
             setErrors(prevErrors => ({ ...prevErrors, email: 'Campo obrigatório' }));
@@ -33,6 +65,8 @@ export default function Login() {
         }
     };
 
+    //Ao sair do campo da senha, verifica se o campo está preenchido e se a senha tem pelo menos 6 caracteres
+    //Caso contrário, salva uma mensagem de erro no state errors
     const handlePasswordBlur = () => {
         if (!password) {
             setErrors(prevErrors => ({ ...prevErrors, password: 'Campo obrigatório' }));
@@ -43,10 +77,18 @@ export default function Login() {
         }
     };
 
+    //Ao submeter as informações de login, verifica se os campos estão preenchidos corretamente
+    //Caso contrário, exibe uma mensagem de erro
+    //Se o checkbox estiver marcado, salva os dados no localStorage
+    //Redireciona para a página de sucesso de login
     const handleSubmit = (e) => {
         e.preventDefault();
         if ((errors.email.length === 0 && errors.password.length === 0) && (email !== '' && password !== '')) {
-            navigate('/loginsuccess');
+            if (keepConnected) {
+                localStorage.setItem('email', email);
+                localStorage.setItem('password', password);
+            }
+            navigate('/loginsuccess', { state: { email } });
         } else {
             Swal.fire({
                 title: 'Erro!',
@@ -60,6 +102,7 @@ export default function Login() {
         }
     };
 
+    //Redirecionamento para a página de recuperação de senha
     const handleForgotPassword = () => {
         navigate('/forgotpassword');
     };
@@ -83,7 +126,8 @@ export default function Login() {
                         {errors.password && <div className='error-message'>{errors.password}</div>}
                     </div>
                     <div className="options">
-                        <div className='keep-conected'><input type="checkbox" />
+                        <div className='keep-conected'>
+                            <input type="checkbox" checked={keepConnected} onChange={handleKeepConnected}/>
                             <div className="keep-conected-text">Mantenha-me conectado</div>
                         </div>
                         <div className='forgot-password' onClick={handleForgotPassword}>Esqueci minha senha</div>

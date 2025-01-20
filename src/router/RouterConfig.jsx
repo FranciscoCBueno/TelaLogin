@@ -10,6 +10,7 @@ export const Rotas = createBrowserRouter([
         element: <App/>,
         children: [
             {
+                //Rota raiz, redireciona para a tela de login
                 index: true,
                 element: <Navigate to="/login" replace/>
             },

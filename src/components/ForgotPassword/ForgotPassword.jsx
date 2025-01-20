@@ -6,9 +6,13 @@ import Swal from 'sweetalert2';
 
 export default function ForgotPassword() {
 
+    //Definição do state
     const [email, setEmail] = useState('');
+    //Hook de navegação
     const navigate = useNavigate();
 
+    //Ao clicar no botão de envio, verifica se o campo de email está preenchido e se o email é válido
+    //Caso contrário, exibe uma mensagem de erro
     const handleSubmitClick = () => {
         if (!email) {
             Swal.fire({
@@ -43,6 +47,7 @@ export default function ForgotPassword() {
         }
     };
 
+    //Cancela a redefinição de senha e retorna para a tela de login
     const handleCancelClick = () => {
         navigate('/login');
     };

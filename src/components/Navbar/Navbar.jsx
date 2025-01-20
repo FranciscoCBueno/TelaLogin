@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 export function Navbar () {
 
+    //Hook de navegação
     const navigate = useNavigate();
 
+    //Ao clicar na logo, redireciona para a tela de login e recarrega a página
     const handleClick = () => {
         navigate('/login');
         window.location.reload(false);
